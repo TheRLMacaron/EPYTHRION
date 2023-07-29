@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdqxta6jd2le"]
+
+[ext_resource type="Script" path="res://enemies.gd" id="1_25c1r"]
+[ext_resource type="Texture2D" uid="uid://cro47yc5tjlin" path="res://thesquad.jpg" id="2_n1yx0"]
+[ext_resource type="FontFile" uid="uid://cit6txu4dyasp" path="res://prstart.ttf" id="5_k6va6"]
+
+[node name="enemies" type="Node2D"]
+position = Vector2(410, 182)
+script = ExtResource("1_25c1r")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(545, 291)
+zoom = Vector2(0.61, 0.61)
+
+[node name="Thesquad" type="Sprite2D" parent="."]
+position = Vector2(546.556, 292)
+scale = Vector2(0.738889, 0.738889)
+texture = ExtResource("2_n1yx0")
+
+[node name="go_back" type="Button" parent="."]
+offset_left = 1176.0
+offset_top = -206.0
+offset_right = 1312.0
+offset_bottom = -182.0
+scale = Vector2(2, 2)
+theme_override_fonts/font = ExtResource("5_k6va6")
+text = "Go Back!"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="go_back" to="." method="_on_go_back_pressed"]

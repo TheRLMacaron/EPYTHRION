@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://bu85cthlby3ty"]
+
+[ext_resource type="Script" path="res://earlywarning.gd" id="1_3j61t"]
+[ext_resource type="Texture2D" uid="uid://8wvli382wa8l" path="res://barrynharry.jpg" id="2_vt6o8"]
+[ext_resource type="FontFile" uid="uid://cit6txu4dyasp" path="res://prstart.ttf" id="3_oeglp"]
+
+[node name="earlywarning" type="Node2D"]
+script = ExtResource("1_3j61t")
+
+[node name="Barrynharry" type="Sprite2D" parent="."]
+position = Vector2(576.445, 323.75)
+scale = Vector2(0.450347, 0.450347)
+texture = ExtResource("2_vt6o8")
+
+[node name="letsgo" type="Button" parent="."]
+offset_left = 694.0
+offset_top = 488.0
+offset_right = 830.0
+offset_bottom = 512.0
+scale = Vector2(2, 2)
+theme_override_fonts/font = ExtResource("3_oeglp")
+text = "Lets go!"
+
+[connection signal="pressed" from="letsgo" to="." method="_on_letsgo_pressed"]

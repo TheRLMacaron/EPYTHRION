@@ -1,0 +1,167 @@
+[gd_scene load_steps=10 format=3 uid="uid://dqsalwq3cm11f"]
+
+[ext_resource type="Script" path="res://woodlockv.gd" id="1_hm14f"]
+[ext_resource type="FontFile" uid="uid://cit6txu4dyasp" path="res://prstart.ttf" id="2_2e3ea"]
+[ext_resource type="Texture2D" uid="uid://bk4s7ljuihlwb" path="res://pixil-frame-0 (4).png" id="2_k3sah"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kks1d"]
+size = Vector2(16, 48)
+
+[sub_resource type="Animation" id="Animation_4vj0x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_w477u"]
+resource_name = "idle"
+length = 2.00001
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [0, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_tlyut"]
+resource_name = "wake_down"
+length = 2.10001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -98), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_8alyn"]
+resource_name = "wake_up"
+length = 2.10001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -98)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m1wey"]
+_data = {
+"RESET": SubResource("Animation_4vj0x"),
+"idle": SubResource("Animation_w477u"),
+"wake_down": SubResource("Animation_tlyut"),
+"wake_up": SubResource("Animation_8alyn")
+}
+
+[node name="woodlockv" type="Node2D"]
+script = ExtResource("1_hm14f")
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D"]
+texture = ExtResource("2_k3sah")
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
+shape = SubResource("RectangleShape2D_kks1d")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatableBody2D"]
+libraries = {
+"": SubResource("AnimationLibrary_m1wey")
+}
+
+[node name="up" type="Button" parent="AnimatableBody2D"]
+offset_left = -4.0
+offset_top = -36.0
+offset_right = 20.0
+offset_bottom = -4.99999
+scale = Vector2(0.36, 0.3)
+theme_override_fonts/font = ExtResource("2_2e3ea")
+text = "^"
+
+[node name="down" type="Button" parent="AnimatableBody2D"]
+offset_left = 5.0
+offset_top = 34.0
+offset_right = 29.0
+offset_bottom = 58.0
+rotation = 3.14353
+scale = Vector2(0.36, 0.3)
+theme_override_fonts/font = ExtResource("2_2e3ea")
+text = "^"
+
+[connection signal="pressed" from="AnimatableBody2D/up" to="." method="_on_up_pressed"]
+[connection signal="pressed" from="AnimatableBody2D/down" to="." method="_on_down_pressed"]

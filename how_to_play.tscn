@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://g023jlcd6kbj"]
+
+[ext_resource type="Script" path="res://how_to_play.gd" id="1_3ngxh"]
+[ext_resource type="FontFile" uid="uid://cit6txu4dyasp" path="res://prstart.ttf" id="2_c1ypj"]
+[ext_resource type="Texture2D" uid="uid://bdboxuesdh7fe" path="res://how to play.jpg" id="2_rgb16"]
+[ext_resource type="Texture2D" uid="uid://btxroswdir7kw" path="res://rage mobs/completionorb.png" id="4_pywbs"]
+
+[node name="how_to_play" type="Node2D"]
+script = ExtResource("1_3ngxh")
+
+[node name="HowToPlay2" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("2_rgb16")
+
+[node name="go_back" type="Button" parent="."]
+offset_left = 855.0
+offset_top = 572.0
+offset_right = 991.0
+offset_bottom = 596.0
+scale = Vector2(2, 2)
+theme_override_fonts/font = ExtResource("2_c1ypj")
+text = "Got it!"
+
+[node name="Completionorb" type="Sprite2D" parent="."]
+position = Vector2(1061, 259)
+scale = Vector2(5.54688, 5.54688)
+texture = ExtResource("4_pywbs")
+
+[connection signal="pressed" from="go_back" to="." method="_on_go_back_pressed"]

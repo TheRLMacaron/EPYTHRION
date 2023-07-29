@@ -1,0 +1,165 @@
+[gd_scene load_steps=10 format=3 uid="uid://cnl7thvso8rmi"]
+
+[ext_resource type="Script" path="res://woodlockh.gd" id="1_yj4xp"]
+[ext_resource type="Texture2D" uid="uid://dvlppel2spx0j" path="res://woodlockh.png" id="2_f3oua"]
+[ext_resource type="FontFile" uid="uid://cit6txu4dyasp" path="res://prstart.ttf" id="3_7lraa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yaxkf"]
+size = Vector2(64, 16)
+
+[sub_resource type="Animation" id="Animation_gf25l"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_mi1ob"]
+resource_name = "idle"
+length = 2.00001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_tisb7"]
+resource_name = "wake_left"
+length = 2.10001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-98, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 0]
+}
+
+[sub_resource type="Animation" id="Animation_s44ov"]
+resource_name = "wake_right"
+length = 2.10001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-98, 0), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6ku0f"]
+_data = {
+"RESET": SubResource("Animation_gf25l"),
+"idle": SubResource("Animation_mi1ob"),
+"wake_left": SubResource("Animation_tisb7"),
+"wake_right": SubResource("Animation_s44ov")
+}
+
+[node name="woodlockh" type="Node2D"]
+script = ExtResource("1_yj4xp")
+
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="AnimatableBody2D"]
+texture = ExtResource("2_f3oua")
+hframes = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatableBody2D"]
+shape = SubResource("RectangleShape2D_yaxkf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatableBody2D"]
+libraries = {
+"": SubResource("AnimationLibrary_6ku0f")
+}
+
+[node name="left" type="Button" parent="AnimatableBody2D"]
+offset_left = -42.0
+offset_top = -4.0
+offset_right = -18.0
+offset_bottom = 20.0
+scale = Vector2(0.3, 0.3)
+theme_override_fonts/font = ExtResource("3_7lraa")
+text = "<"
+
+[node name="right" type="Button" parent="AnimatableBody2D"]
+offset_left = 34.0
+offset_top = -3.0
+offset_right = 58.0
+offset_bottom = 21.0
+scale = Vector2(0.3, 0.3)
+theme_override_fonts/font = ExtResource("3_7lraa")
+text = ">"
+
+[connection signal="pressed" from="AnimatableBody2D/left" to="." method="_on_left_pressed"]
+[connection signal="pressed" from="AnimatableBody2D/right" to="." method="_on_right_pressed"]

@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://degw2tbvtjvet"]
+
+[ext_resource type="Script" path="res://info.gd" id="1_yjeox"]
+[ext_resource type="FontFile" uid="uid://cit6txu4dyasp" path="res://prstart.ttf" id="2_8sa0f"]
+[ext_resource type="Texture2D" uid="uid://cpig6qy8ta4dg" path="res://rage mobs/field1.jpg" id="2_ccai1"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_yjeox")
+
+[node name="Field1" type="Sprite2D" parent="."]
+position = Vector2(575.639, 323.922)
+scale = Vector2(0.300072, 0.300072)
+texture = ExtResource("2_ccai1")
+
+[node name="enemies" type="Button" parent="."]
+offset_left = 340.0
+offset_top = 239.0
+offset_right = 572.0
+offset_bottom = 263.0
+scale = Vector2(2, 2)
+theme_override_fonts/font = ExtResource("2_8sa0f")
+text = "   Enemies!   "
+
+[node name="how_to_play" type="Button" parent="."]
+offset_left = 342.0
+offset_top = 324.0
+offset_right = 574.0
+offset_bottom = 348.0
+scale = Vector2(2, 2)
+theme_override_fonts/font = ExtResource("2_8sa0f")
+text = " How to Play! "
+
+[node name="go_back" type="Button" parent="."]
+offset_left = 343.0
+offset_top = 411.0
+offset_right = 575.0
+offset_bottom = 435.0
+scale = Vector2(2, 2)
+theme_override_fonts/font = ExtResource("2_8sa0f")
+text = "   Go back!   "
+
+[connection signal="pressed" from="enemies" to="." method="_on_enemies_pressed"]
+[connection signal="pressed" from="how_to_play" to="." method="_on_how_to_play_pressed"]
+[connection signal="pressed" from="go_back" to="." method="_on_go_back_pressed"]

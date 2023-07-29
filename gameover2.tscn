@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://bx8ivn2r3jdwf"]
+
+[ext_resource type="Texture2D" uid="uid://djygsm58t4u5q" path="res://gameover.jpg" id="1_4j26d"]
+[ext_resource type="FontFile" uid="uid://cit6txu4dyasp" path="res://prstart.ttf" id="2_dfibm"]
+[ext_resource type="Script" path="res://retryboss2.gd" id="3_fl1yk"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Gameover" type="Sprite2D" parent="."]
+position = Vector2(575, 323.5)
+scale = Vector2(0.449306, 0.449306)
+texture = ExtResource("1_4j26d")
+
+[node name="Button" type="Button" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 350.0
+offset_top = 291.0
+offset_right = 502.0
+offset_bottom = 322.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+size_flags_horizontal = 0
+theme_override_fonts/font = ExtResource("2_dfibm")
+text = "  RETRY  "
+script = ExtResource("3_fl1yk")
+
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
